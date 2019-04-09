@@ -1,0 +1,96 @@
+{{outlet}}
+
+
+
+<table dir="rtl">
+    <thead>
+        <tr>
+
+            <th>משימות</th>
+            <th><button {{action "addToggle"}} class="add"><span class="plusCircle">+</span></button></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#if addToggleCondition}}
+        <tr class="addingTask">
+            <td>{{input value=newTask placeholder="Task title"}}</td>
+            <td><button {{action 'createTask'}}>הוסף</button></td>
+        </tr>
+        {{/if}}
+        {{#each model as |task|}}
+        <tr>
+
+            {{#if task.isDone}}
+            <td><label class="container">
+                <input class="done" type="checkbox" checked={{task.isDone}}
+                    onchange={{action "toggleCompleted" task.id}}>
+                    <span class="checkmark"></span>
+
+            </label>
+
+                <span class=editDone>{{task.id}}.</span>
+                <!--
+
+                <span class=editDone contenteditable="true"
+                    value=updatedTitle>{{task.title}}</span>
+
+                    -->
+
+                    <label class=editDone>{{task.title}}</label>
+
+
+            </td>
+            {{else}}
+
+            <td><label class="container">
+            <input class="done" type="checkbox" checked={{task.isDone}}
+                    onchange={{action "toggleCompleted" task.id}}>
+                     <span class="checkmark"></span>
+                     </label>
+
+                {{task.id}}.
+                <!--
+
+                <label class=editNotDone contenteditable="true"  ondblclick={{action "startEditing" task.id}} value={{task.title}}>{{task.title}}</label>
+
+                <input class=editNotDone  onchange={{action "startEditing" task.id}} value={{task.title}}>
+
+                {{#if editMode}}
+                <input onchange={{action "startEditing" task.id}} value={{task.title}}>
+                {{/if}}
+
+                <input onchange={{action  "startEditing" task.id (mut val) value="target.value"}} value={{task.title}}>
+
+                <span {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
+                {{#if todo.isEditing}}
+                 <input class="edit">
+                {{else}}
+                 {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
+                <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label><button class="destroy"></button>
+                 {{/if}}
+                 </span>
+
+                
+                -->
+                 <label class=editNotDone contenteditable="true"  onchange={{action "startEditing" task.id}} value={{task.title}}>{{task.title}}</label>
+                
+            </td>
+            {{/if}}
+
+
+            <td><button {{action 'removeTask' task.id}} class="del"><b>X</b></button></td>
+
+        </tr>
+        {{/each}}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                <p>{{lenght}}</p>
+                <!--
+                <p>Remaining:{{7}} completed:{{4}} Total:{{taskArraySize}}</p>
+                -->
+            </td>
+        </tr>
+    </tfoot>
+</table>

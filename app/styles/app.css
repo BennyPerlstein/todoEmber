@@ -1,0 +1,138 @@
+table{
+    width: 20%;
+    margin-right: 50px;
+    margin-left: auto;
+    border-collapse: collapse;
+}
+
+th{
+    height: 70px;
+    vertical-align: middle;
+    font-size: 28px;
+    background-image: linear-gradient(rgb(243, 195, 63), rgb(145, 117, 41));
+   
+}
+
+tr{
+    height: 70px;
+    vertical-align: middle;
+    font-size: 25px;
+    
+}
+
+tr:nth-child(even){
+    background-color: antiquewhite;
+}
+
+td{
+    border-bottom: 1px solid black;
+    border-left: 0px;
+    border-right: 0px;
+
+}
+
+th button{
+    border: none;
+    padding: 5px 5px 1px;
+    text-align: center;
+    text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 6px 6px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.plusCircle {
+    width: 120px;
+    line-height: 42px;
+    border-radius: 70%;
+    text-align: center;
+    font-size: 30px;
+    border: 2px solid black;
+}
+
+td button.del{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    font-size: 20px;
+    align-content: center;
+}
+
+td button.done{
+    border-radius:10px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+    padding:17px 18px ;
+    background-color: white;
+}
+
+td .editDone{
+    text-decoration: line-through;
+    color: #566963;
+}
+
+td .editNotDone{
+
+}
+
+
+td .container {
+    display: block;
+    position: relative;
+    float: right;
+    padding-left: 35px;
+    padding-right: 5px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+td .container input {
+    position:absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+   
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a gray background */
+  .container input:checked ~ .checkmark {
+    background-color: rgb(102, 104, 105);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  
+  
+  /* Style the checkmark/indicator */
+  
