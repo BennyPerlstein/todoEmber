@@ -7,10 +7,25 @@ export default Controller.extend({
     isDone: false,
     addToggleCondition: false,
     editMode: false,
+    taskArraySize: 0,
+
+    
     //isEditing: false,
     
     
-   /* taskArraySize: function(){
+   /* 
+   
+    calculateArraySize(){
+      this.store.findAll('task', {backgroundReload: false})
+     .then(function(task){
+         //task.set ('title', updatedTitle);
+         alert(task.length)
+         return task.length;
+
+    })
+  },
+   
+   taskArraySize: function(){
         return this.store.findAll('task').length.toString;
     },
 
@@ -34,9 +49,43 @@ export default Controller.extend({
  // }.property('@each.isDone'),
 
     actions: {
-        //taskArray = this.get('model').lenght,
+
+      
+
+        updateTasks(){
+          this.store.findAll('task', {backgroundReload: false})
+         .then(function(task){
+             
+             document.getElementById("arraySize").innerHTML = +task.length;
+
+             let completedTasks=task.filterBy('isDone', true);
+             document.getElementById("arraySizeCompleted").innerHTML = +completedTasks.length;
+
+             let unCompletedTasks=task.filterBy('isDone', false);
+             document.getElementById("arraySizeUnCompleted").innerHTML = +unCompletedTasks.length;
+        });
+
+        },
+
+        
+        
         addToggle(){
-          
+/*
+          this.store.findAll('task', {backgroundReload: false})
+         .then(function(task){
+             
+             document.getElementById("arraySize").innerHTML = +task.length;
+
+             let completedTasks=task.filterBy('isDone', true);
+             document.getElementById("arraySizeCompleted").innerHTML = +completedTasks.length;
+
+             let unCompletedTasks=task.filterBy('isDone', false);
+             document.getElementById("arraySizeUnCompleted").innerHTML = +unCompletedTasks.length;
+            
+        });
+        */
+       
+        
           if(!this.addToggleCondition){
             this.set('addToggleCondition', true);
           }else{

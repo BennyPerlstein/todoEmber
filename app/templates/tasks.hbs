@@ -7,14 +7,14 @@
         <tr>
 
             <th>משימות</th>
-            <th><button {{action "addToggle"}} class="add"><span class="plusCircle">+</span></button></th>
+            <th><button {{action "addToggle" }} {{action "updateTasks" }}class="add"><span class="plusCircle">+</span></button></th>
         </tr>
     </thead>
     <tbody>
         {{#if addToggleCondition}}
         <tr class="addingTask">
             <td>{{input value=newTask placeholder="Task title"}}</td>
-            <td><button {{action 'createTask'}}>הוסף</button></td>
+            <td><button {{action 'createTask'}} {{action "updateTasks" }}>הוסף</button></td>
         </tr>
         {{/if}}
         {{#each model as |task|}}
@@ -78,7 +78,7 @@
             {{/if}}
 
 
-            <td><button {{action 'removeTask' task.id}} class="del"><b>X</b></button></td>
+            <td><button {{action 'removeTask' task.id}} {{action "updateTasks" }} class="del"><b>X</b></button></td>
 
         </tr>
         {{/each}}
@@ -86,10 +86,12 @@
     <tfoot>
         <tr>
             <td colspan="3">
-                <p>{{lenght}}</p>
-                <!--
-                <p>Remaining:{{7}} completed:{{4}} Total:{{taskArraySize}}</p>
-                -->
+               
+                <p>נשארו:<span id="arraySizeUnCompleted"></span> הושלמו:<span id="arraySizeCompleted"></span> 
+                    סה"כ:<span id="arraySize"></span></p>
+                    <button {{action "updateTasks" }}>עדכן</button>
+               
+                
             </td>
         </tr>
     </tfoot>
