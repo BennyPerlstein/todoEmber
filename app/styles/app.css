@@ -75,11 +75,6 @@ td .editDone{
     color: #566963;
 }
 
-td .editNotDone{
-
-}
-
-
 td .container {
     display: block;
     position: relative;
@@ -130,9 +125,8 @@ td .container input {
     position: absolute;
     display: none;
   }
-  
-  /* Show the checkmark when checked */
-  
-  
-  /* Style the checkmark/indicator */
+
+  .titleValue{
+    display: inline-block;
+  }
   

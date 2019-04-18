@@ -1,20 +1,17 @@
 {{outlet}}
 
-
-
 <table dir="rtl">
     <thead>
         <tr>
-
             <th>משימות</th>
-            <th><button {{action "addToggle" }} {{action "updateTasks" }}class="add"><span class="plusCircle">+</span></button></th>
+            <th><button {{action "addToggle" }} class="add"><span class="plusCircle">+</span></button></th>
         </tr>
     </thead>
     <tbody>
         {{#if addToggleCondition}}
         <tr class="addingTask">
-            <td>{{input value=newTask placeholder="Task title"}}</td>
-            <td><button {{action 'createTask'}} {{action "updateTasks" }}>הוסף</button></td>
+            <td>{{input value=newTask placeholder="כותרת"}}</td>
+            <td><button {{action 'createTask'}}>הוסף</button></td>
         </tr>
         {{/if}}
         {{#each model as |task|}}
@@ -22,63 +19,32 @@
 
             {{#if task.isDone}}
             <td><label class="container">
-                <input class="done" type="checkbox" checked={{task.isDone}}
-                    onchange={{action "toggleCompleted" task.id}}>
+                    <input class="done" type="checkbox" checked={{task.isDone}}
+                        onchange={{action "toggleCompleted" task.id}}>
                     <span class="checkmark"></span>
 
-            </label>
-
+                </label>
                 <span class=editDone>{{task.id}}.</span>
-                <!--
-
-                <span class=editDone contenteditable="true"
-                    value=updatedTitle>{{task.title}}</span>
-
-                    -->
-
-                    <label class=editDone>{{task.title}}</label>
-
-
+                <label class=editDone>{{task.title}}</label>
             </td>
             {{else}}
 
             <td><label class="container">
-            <input class="done" type="checkbox" checked={{task.isDone}}
-                    onchange={{action "toggleCompleted" task.id}}>
-                     <span class="checkmark"></span>
-                     </label>
+                    <input class="done" type="checkbox" checked={{task.isDone}}
+                        onchange={{action "toggleCompleted" task.id}}>
+                    <span class="checkmark"></span>
+                </label>
 
                 {{task.id}}.
-                <!--
-
-                <label class=editNotDone contenteditable="true"  ondblclick={{action "startEditing" task.id}} value={{task.title}}>{{task.title}}</label>
-
-                <input class=editNotDone  onchange={{action "startEditing" task.id}} value={{task.title}}>
-
-                {{#if editMode}}
-                <input onchange={{action "startEditing" task.id}} value={{task.title}}>
-                {{/if}}
-
-                <input onchange={{action  "startEditing" task.id (mut val) value="target.value"}} value={{task.title}}>
-
-                <span {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
-                {{#if todo.isEditing}}
-                 <input class="edit">
-                {{else}}
-                 {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
-                <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label><button class="destroy"></button>
-                 {{/if}}
-                 </span>
-
-                
-                -->
-                 <label class=editNotDone contenteditable="true"  onchange={{action "startEditing" task.id}} value={{task.title}}>{{task.title}}</label>
-                
+                <div class="titleValue">
+                    {{ember-inline-edit value=(readonly value) saveButtonClass=task.id 
+                 enable=true placeholder=task.title onSave=(action 'onSave' task.id)
+                 showSaveButton=false showCancelButton=false}}
+                </div>
             </td>
             {{/if}}
 
-
-            <td><button {{action 'removeTask' task.id}} {{action "updateTasks" }} class="del"><b>X</b></button></td>
+            <td><button {{action 'removeTask' task.id}} class="del"><b>X</b></button></td>
 
         </tr>
         {{/each}}
@@ -86,12 +52,9 @@
     <tfoot>
         <tr>
             <td colspan="3">
-               
-                <p>נשארו:<span id="arraySizeUnCompleted"></span> הושלמו:<span id="arraySizeCompleted"></span> 
-                    סה"כ:<span id="arraySize"></span></p>
-                    <button {{action "updateTasks" }}>עדכן</button>
-               
-                
+                <p>נשארו:{{tasksTodo.length}}<span id="arraySizeUnCompleted"></span> הושלמו:{{doneTasks.length}}<span
+                        id="arraySizeCompleted"></span>
+                    סה"כ:{{model.length}}<span id="arraySize"></span></p>
             </td>
         </tr>
     </tfoot>
